@@ -16,13 +16,13 @@ app.post('/hooks/catch/:userId/:zapId', async (req: Request, res: Response) => {
   //  then continue otherwise failed
   //}
   await db.$transaction(async (tx) => {
-    const run = await db.zapRun.create({
+    const run = await tx.zapRun.create({
       data: {
         zapId: zapId,
         Metadata: body,
       },
     });
-    await db.zapRunOutbox.create({
+    await tx.zapRunOutbox.create({
       data: {
         zapRunId: run.id,
       },
