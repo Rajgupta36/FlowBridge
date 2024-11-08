@@ -1,0 +1,10 @@
+# Ignore artifacts:
+build
+coverage
+node_modules
+
+# Ignore all JavaScript files in the dist directory
+dist/**/*.js
+
+# Ignore all files in the logs directory
+logs

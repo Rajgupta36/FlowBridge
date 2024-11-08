@@ -62,6 +62,7 @@ model ZapRun {
   zapId        String
   zap          Zap           @relation(fields: [zapId], references: [id], onDelete: Cascade)
   zapRunOutbox ZapRunOutbox?
+  Metadata     Json
 }
 
 model ZapRunOutbox {
