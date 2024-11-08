@@ -21,20 +21,20 @@ model User {
 }
 
 model Zap {
-  id       String    @unique @default(uuid())
-  userId   Int?
-  User     User?     @relation(fields: [userId], references: [id])
-  triggers Trigger[]
-  actions  Action[]
-  zapRuns  ZapRun[] //one to many
+  id      String   @unique @default(uuid())
+  userId  Int?
+  User    User?    @relation(fields: [userId], references: [id])
+  trigger Trigger? //one to one
+  actions Action[]
+  zapRuns ZapRun[] //one to many
 }
 
 model Trigger {
   id                 String           @unique @default(uuid())
-  zapId              String
+  zapId              String           @unique
   availableTriggerId String
   type               AvailableTrigger @relation(fields: [availableTriggerId], references: [id])
-  zap                Zap              @relation(fields: [zapId], references: [id])
+  zap                Zap              @relation(fields: [zapId], references: [id], onDelete: Cascade)
 }
 
 model AvailableTrigger {
